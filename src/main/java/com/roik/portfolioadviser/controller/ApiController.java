@@ -26,21 +26,17 @@ public class ApiController {
                                  @RequestParam(required = false) String country,
                                  @RequestParam(required = false) String startDate) {
         HashMap<String, String> parameters = new HashMap<>();
-        parameters.put("type", type);
 
-        if (Objects.nonNull(country)) {
-            parameters.put("country", country);
-        }
-
-        if (Objects.nonNull(currency)) {
-            parameters.put("currency", currency);
-        }
-
-        if (Objects.nonNull(startDate)) {
-            parameters.put("startDate", startDate);
-        }
-
+        putParameterToMap("type", type, parameters);
+        putParameterToMap("country", country, parameters);
+        putParameterToMap("currency", currency, parameters);
+        putParameterToMap("startDate", startDate, parameters);
         return portfolioService.getPortfolio(parameters);
     }
 
+    private void putParameterToMap(String key, String parameter, HashMap<String, String> parameters) {
+        if (Objects.nonNull(parameter)) {
+            parameters.put(key, parameter);
+        }
+    }
 }
