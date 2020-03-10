@@ -1,5 +1,9 @@
 package com.roik.portfolioadviser.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +24,13 @@ public abstract class AbstractPriceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonProperty("datetime")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     @Column(name = "date", columnDefinition = "DATE")
     private LocalDate date;
 
+    @JsonProperty("close")
     @Column(name = "price")
     private BigDecimal price;
 }

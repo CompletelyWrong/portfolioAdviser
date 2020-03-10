@@ -2,6 +2,7 @@ package com.roik.portfolioadviser.controller;
 
 import com.roik.portfolioadviser.entity.PortfolioEntity;
 import com.roik.portfolioadviser.service.PortfolioService;
+import com.roik.portfolioadviser.service.StockService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @RestController
 public class ApiController {
     private final PortfolioService portfolioService;
+    private final StockService stockService;
 
     @RequestMapping(value = "api/V1/portfolio/{type}", method = GET)
     @ResponseBody
@@ -31,6 +33,7 @@ public class ApiController {
         putParameterToMap("country", country, parameters);
         putParameterToMap("currency", currency, parameters);
         putParameterToMap("startDate", startDate, parameters);
+        stockService.getPriceForStockByDate(null);
         return portfolioService.getPortfolio(parameters);
     }
 

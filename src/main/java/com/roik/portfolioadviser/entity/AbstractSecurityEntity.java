@@ -1,5 +1,6 @@
 package com.roik.portfolioadviser.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public abstract class AbstractSecurityEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonProperty("currency")
     @Column(name = "currency")
     private String currency;
 
@@ -28,6 +30,7 @@ public abstract class AbstractSecurityEntity {
     @Column(name = "country")
     private String country;
 
+    @JsonProperty("exchange")
     @Column(name = "exchange_name")
     private String exchangeName;
 }
